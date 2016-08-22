@@ -25,8 +25,11 @@ Feature: Shows in watch list update the statistics
 		Then I see the number of my "episodes" has increased by "3"
 
 	#Scenario: User marks a show as watched and sees their statistics updated
-		#When 
+		Scenario: <enter scenario title>
+		    When 
 
+	#Scenario template
+	# Make Scenario #1 a template, adding different shows, and expecting different increase in number of stat. 	    
 
 
 
