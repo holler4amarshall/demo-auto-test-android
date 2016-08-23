@@ -10,6 +10,7 @@ Then(/^I see the Left menu$/) do
 end
 
 When(/^I tap on "([^"]*)" from the Left menu$/) do |menu_item|
+  driver.manage.timeouts.implicit_wait = 5
   find_element(:xpath, ("//android.widget.CheckedTextView[@text='#{menu_item}']")).click
 end
 

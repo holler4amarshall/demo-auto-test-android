@@ -32,12 +32,12 @@ When(/^I search for a show called "([^"]*)"$/) do |show_name|
 		find_element(:id,  "editTextSearchBar").send_keys(show_name +"\n")
 
 		puts 'the user submitted a search for: ' + show_name
-		sleep  3
+		#sleep  5
 	end
 end
 
 Then(/^I select the matching show called "([^"]*)"$/) do |show_name|
-	driver.manage.timeouts.implicit_wait = 15
+	driver.manage.timeouts.implicit_wait = 30
   	find_element(:xpath, ("//android.widget.TextView[@text='#{show_name}']")).click
 end
 
