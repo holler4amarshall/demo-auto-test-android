@@ -5,7 +5,7 @@ def caps
 		caps: {
 			deviceName: "Samsung",
 			platformName: "Android",
-			app: "/Users/hollycopter/Documents/workspace/udemy/ruby_cucumber_android/android_automation/features/support/SeriesGuide-31.1.apk",
+			app: "/<path to demo-auto-test-android project>/android_automation/features/support/SeriesGuide-31.1.apk",
             appPackage: "com.battlelancer.seriesguide",
             appActivity: ".ui.ShowsActivity",
 			newCommandTimeout: "3600",
