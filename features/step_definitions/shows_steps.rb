@@ -1,57 +1,62 @@
 # This file contains the step definitions for the shows.feature file
 
-#Add Show screen
-search_field_placeholder = "Type a show name"
+require_relative 'screens/shows'
+require_relative 'screens/menu'
+
 
 # Add Show screen step definitions
 
 Given(/^I am on the Shows screen$/) do
-  find_element(:id, "Open navigation drawer") #verify hamburger menu icon is displayed
-  find_element(:xpath, ("//android.widget.TextView[@text='Shows']")) #verify Shows text is displayed
-  find_element(:id, "buttonShowsAdd") #verify floating plus button is displayed
+  Menu.verify_hamburger_displays
+  Menu.verify_heading_displays(Shows)
+  Shows.floating_plus_icon_displays
+end
+
+Given(/^I dismissed the Get Started dialogue$/) do
+  Shows.dismiss_get_started_dialogue
 end
 
 
 When(/^I tap on the floating plus button$/) do
-  find_element(:id, "buttonShowsAdd").click
+  Shows.tap_floating_plus_icon
 end
 
 
 Then(/^I am on the Add Show screen$/) do
-	actual_text = find_elements(id: "editTextSearchBar")[0].text #get search field placeholder text
-	if search_field_placeholder != actual_text # check that expected placeholder text matches actual placeholder text
-		fail("Expected: search field placeholder text to show #{search_field_placeholder}. Actual: value is #{actual_text}")
-	end
-	find_element(:xpath, ("//android.widget.LinearLayout")).find_element(:xpath, ("//android.widget.TextView[@text='ADD SHOW']")) #verify ADD SHOW label is displayed
+	Shows.verify_add_shows_tab_displays
 end
 
 When(/^I search for a show called "([^"]*)"$/) do |show_name|
-	actual_placeholder = find_element(:id, "editTextSearchBar").text
-	puts 'the actual placeholder text is: ' + actual_placeholder
-	if actual_placeholder = search_field_placeholder
-		find_element(:id,  "editTextSearchBar").send_keys(show_name +"\n")
-
-		puts 'the user submitted a search for: ' + show_name
-	end
+	Shows.tap_floating_plus_icon
+	Shows.search_show(show_name)
+	sleep  3
 end
 
 Then(/^I select the matching show called "([^"]*)"$/) do |show_name|
-	driver.manage.timeouts.implicit_wait = 30
-  	if find_element(:xpath, ("//android.widget.TextView[@text='Searching failed, try again later.']"))
-  		fail("Backend services are down. App unable to perform a successful search.")
-  	else find_element(:xpath, ("//android.widget.TextView[@text='#{show_name}']")).click
-  	end
+  	Shows.select_show(show_name)
+  	sleep  8
 end
 
 Then(/^I add "([^"]*)" to my watch list via the dialogue$/) do |show_name|
-  	find_element(:xpath, ("//android.widget.TextView[@text='#{show_name}']"))
-  	find_element(:xpath, ("//android.widget.Button[@text='Add show']")).click
-  	find_element(:id, "Mad Men is already in your show list.")
+	Shows.add_show(show_name)
 end
 
-When(/^I tap on the back button$/) do
-  	find_element(:id, "Navigate up").click
+Then(/^I view details for "([^"]*)"$/) do |show_name|
+  	Shows.view_show_details(show_name)
 end
+
+Then(/^I note the season and episode$/) do
+  Shows.find_next_season_and_episode
+end
+
+Then(/^I mark the episode as watched$/) do
+  Shows.click_set_watched
+end
+
+Then(/^I note that the season episode have incremented by "([^"]*)" and "([^"]*)"$/) do |increment1, increment2|
+	Shows.check_season_episode_increments(increment1, increment2)
+end
+
 
 
 

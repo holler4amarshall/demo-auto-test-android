@@ -1,70 +1,61 @@
 ### step definitions specific to the statistics screen ###
 
-#note to tester: create function for logic 
-Then(/^I see the number of my "([^"]*)"$/) do |statistic|
+#associated files
+require_relative 'screens/statistics_screen'
 
-$actual_shows = 0
-$actual_sub_show_stat = 0
-$actual_episodes = 0
-	
-	if statistic == "shows"
-		stat_id = "textViewStatsShows"
-		$actual_shows = Integer(find_element(:xpath, ("//android.widget.TextView[contains(@resource-id, '#{stat_id}')]")).text)
-  		puts 'the number of ' + statistic + ' is: ' + String($actual_shows) #log_message
+# step definitions
 
-
-  	elsif statistic == "shows with next episodes"
-  		sub_stat_id = "textViewStatsShowsWithNext"
-		sub_show_label = 'WITH NEXT EPISODES'
-		$actual_sub_show_stat = Integer(find_element(:xpath, ("//android.widget.TextView[contains(@resource-id, '#{sub_stat_id}')]")).text[0]) #get value of 2nd level statistic
-  		puts 'the number of ' + statistic + ' is: ' + String($actual_sub_show_stat) #log_message
-	
-	else statistic == "episodes"
-		stat_id="textViewStatsEpisodes"
-		sub_stat_id="textViewStatsEpisodesWatched"
-		sub_stat_label="WATCHED"
-		$actual_episodes = Integer(find_element(:xpath, ("//android.widget.TextView[contains(@resource-id, '#{stat_id}')]")).text)
-  		puts 'the number of ' + statistic + ' is: ' + String($actual_episodes) #log_message
-	
-	end
-
+And(/^All statistics are currently zero$/) do
+	Statistics.get_shows
+  	Statistics.get_shows_with_next_episodes
+  	Statistics.get_episodes
+  	Statistics.get_episodes_watched
+  	Statistics.verify_value('shows ', $shows_count, 0, 0)
+  	Statistics.verify_value('shows_nxt_ep ', $shows_with_next_episodes_count, 0, 0)
+  	Statistics.verify_value('ep ', $episodes_count, 0, 0)
+  	Statistics.verify_value('ep_watched ', $episodes_watched_count, 0, 0)
 end
 
-
-### Create function for logic (which is repeated x 3 below)
-### Split string by digits/alpha and then grab the numbers only in order to calculate the totals correctly. 
-
-Then(/^I see the number of my "([^"]*)" has increased by "([^"]*)"$/) do |statistic, number_increase|
-	
-	if statistic == "shows"
-		stat_id = "textViewStatsShows"
-		actual_increase = (total_shows = Integer(find_element(:xpath, ("//android.widget.TextView[contains(@resource-id, '#{stat_id}')]")).text) - Integer($actual_shows))
-		#actual_increase = total_shows - Integer($actual_shows)
-		if actual_increase != Integer(number_increase)
-			fail("Actual: the increase in number of #{statistic}  is: #{(actual_increase)} #{statistic}. However, expected is: #{number_increase} #{statistic}.")
-  		  	end
-
-  	elsif statistic == "shows with next episodes"
-  		sub_stat_id = "textViewStatsShowsWithNext"
-		sub_show_label = 'WITH NEXT EPISODES'
-		actual_increase = (total_sub_show_stat = Integer(find_element(:xpath, ("//android.widget.TextView[contains(@resource-id, '#{sub_stat_id}')]")).text[0]) - Integer($actual_sub_show_stat)) #get value of 2nd level statistic
-		if actual_increase != Integer(number_increase)
-			fail("Actual: the increase in number of #{statistic}  is: #{(actual_increase)} #{statistic}. However, expected is: #{number_increase} #{statistic}.")
-	end
-  
-	
-	else statistic == "episodes"
-		stat_id="textViewStatsEpisodes"
-		sub_stat_id="textViewStatsEpisodesWatched"
-		sub_stat_label="WATCHED"
-		actual_increase = (total_episodes_stat = Integer(find_element(:xpath, ("//android.widget.TextView[contains(@resource-id, '#{stat_id}')]")).text[0]) - Integer($actual_episodes)) 
-  		puts 'the number of ' + statistic + ' is: ' + String($actual_episodes)
-  		if actual_increase != Integer(number_increase)
-			fail("Actual: the increase in number of #{statistic}  is: #{(actual_increase)} #{statistic}. However, expected is: #{number_increase} #{statistic}.")
-	end
-  end
+Then(/^I see the number of my shows is different by "([^"]*)"$/) do |expected_increase|
+	Statistics.get_shows
+	#arguments below are: type of statistic, counter array, array index, expected increase
+	Statistics.verify_difference('shows ', $shows_count, 1, expected_increase)
 end
 
+And(/^I see the number of my shows with next episodes is different by "([^"]*)"$/) do |expected_increase|
+	Statistics.get_shows_with_next_episodes
+	Statistics.verify_difference('shows_nxt_ep', $shows_with_next_episodes_count, 1, 1)
+end 
 
+And(/^I see the number of my episodes is different by "([^"]*)"$/) do |expected_increase|
+	Statistics.get_episodes
+	Statistics.verify_difference('ep  ', $episodes_count, 1, 93)
+end 
+
+And(/^I see the number of my episodes watched is different by "([^"]*)"$/) do |expected_increase|
+	Statistics.get_episodes_watched
+	Statistics.verify_difference('ep_watched ', $episodes_watched_count, 1, 0)
+end
+
+#### Only used for the semi-obsolete component tests:- 
+
+Then(/^I see the number of my shows$/) do
+	Statistics.get_shows
+	puts "got shows: #{$shows_count[0]}"
+end
+
+Then(/^I see the number of my shows with next episodes$/) do
+  	Statistics.get_shows_with_next_episodes
+	puts "the number of shows with next episodes is" + $shows_with_next_episodes_count[0]
+end
+
+Then(/^I see the number of my episodes$/) do
+  	Statistics.get_episodes
+	puts "the number of episodes is" + $episodes_count[0]
+end
+
+Then(/^I see the number of my episodes watched$/) do
+  Statistics.get_episodes_watched
+end
 
 

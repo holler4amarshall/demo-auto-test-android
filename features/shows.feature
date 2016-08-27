@@ -1,4 +1,4 @@
-
+@component_tests
 Feature: Add show from Home screen
 	Scenario: Tap Floating + Button To Load Shows Search Screen
 		Given I am on the Shows screen
