@@ -21,7 +21,7 @@ module Menu
 
 
 		def select_menu_item(menu_item)
-			sleep  2
+			set_wait
 			find_element(:xpath, ("//android.widget.CheckedTextView[@text='#{menu_item}']")).click
 		end
 
