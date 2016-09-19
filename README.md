@@ -84,24 +84,26 @@ Alternatively:
 
 When the test cases are running, you can watch the log file output on the command line, and you can see the steps being executed automatically in your Genymotion emulator. 
 
-### Example test output
+### Test Outputs
 
 #### Log File Output: 
-Note that the test cases are a work in progress. The sample output here provides an indication of the log file output following successful run of the test cases. Note that the test cases will be refactored in order to improve the tests themselves and the reports. 
+Note that the test cases are a work in progress. The sample output here provides an indication of the log file output following successful run of the test cases. 
 
 ![sample cucumber test output](https://codeontheroaddotinfo.files.wordpress.com/2016/08/screen-shot-2016-09-19-at-2-44-20-pm.png?w=1320)
 
 #### HTML Reports
 HTML Reports are configured in the cucumber.yml file. After executing the tests, the report can be found by accessing the project's 'demo-auto-test-android/report.html' file 
 
-### Example html report
+#### Example html report
 ![sample cucumber html report](https://codeontheroaddotinfo.files.wordpress.com/2016/08/screen-shot-2016-09-19-at-2-46-41-pm.png?w=1320)
 
+#### Screenshots on failure
+When a scenario fails, the test project is configured (via hooks.rb file) to take a screenshot and place it in the screenshots folder for manual inspection. 
 
 ### Test structure
 * The 'env.rb' file contains libraries, methods and configuration details specific to the application and devices under test. This file may be required to be edited for your individual needs. 
 
-* The 'hooks.rb' file contains set up and tear down steps for running the cucumber steps. 
+* The 'hooks.rb' file contains set up and tear down steps for running the cucumber steps. This file also contains the configuration for taking screenshots on scenario failure. 
 
 * The 'cucumber.yml' file contains a list of profiles & configuration to enable reporting to logs and html report.  
 
