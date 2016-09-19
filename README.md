@@ -69,7 +69,7 @@ Via command line, access the root folder where you saved the test project (e.g.,
 (this will initiate the tests that are included in the *profile*: e2e_tests. html reports are available when using this command)
 
 
-alternatively:
+Alternatively:
 
     >> cucumber
     
@@ -85,9 +85,14 @@ alternatively:
 When the test cases are running, you can watch the log file output on the command line, and you can see the steps being executed automatically in your Genymotion emulator. 
 
 ### Example test output
+
+#### Log File Output: 
 Note that the test cases are a work in progress. The sample output here provides an indication of the log file output following successful run of the test cases. Note that the test cases will be refactored in order to improve the tests themselves and the reports. 
 
 ![sample cucumber test output](https://codeontheroaddotinfo.files.wordpress.com/2016/08/screen-shot-2016-09-19-at-2-44-20-pm.png?w=1320)
+
+#### HTML Reports
+HTML Reports are configured in the cucumber.yml file. After executing the tests, the report can be found by accessing the project's 'demo-auto-test-android/report.html' file 
 
 ### Example html report
 ![sample cucumber html report](https://codeontheroaddotinfo.files.wordpress.com/2016/08/screen-shot-2016-09-19-at-2-46-41-pm.png?w=1320)
@@ -98,7 +103,7 @@ Note that the test cases are a work in progress. The sample output here provides
 
 * The 'hooks.rb' file contains set up and tear down steps for running the cucumber steps. 
 
-* The 'cucumber.yml' file contains a list of profiles & configuration to enable reporting. 
+* The 'cucumber.yml' file contains a list of profiles & configuration to enable reporting to logs and html report.  
 
 * Tags have been used to categorise tests. Eg @e2e_tests is used to categorise e2e regression style tests, @component_tests is used to categorise tests that will be more suited to lower level testing, @wip is used to categorise work in progress test cases for debugging purposes when creating tests. 
 
