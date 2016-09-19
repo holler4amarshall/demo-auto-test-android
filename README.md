@@ -100,6 +100,13 @@ HTML Reports are configured in the cucumber.yml file. After executing the tests,
 #### Screenshots on failure
 When a scenario fails, the test project is configured (via hooks.rb file) to take a screenshot and place it in the screenshots folder for manual inspection. 
 
+### Debug Tests
+'pry' gem is used within the test project to enable debugging. Breakpoints can be added using the following command on any .rb file: 
+
+    >> binding.pry
+    
+After the breakpoint is added to the code, run the cucumber test, and the test will stop running at your breakpoint. At this point, it is possible to troubleshoot appium commands from the command line itself, in order to interact with the simulator manually, as part of the test process. 
+
 ### Test structure
 * The 'env.rb' file contains libraries, methods and configuration details specific to the application and devices under test. This file may be required to be edited for your individual needs. 
 
