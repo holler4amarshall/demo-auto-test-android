@@ -92,7 +92,7 @@ Note that the test cases are a work in progress. The sample output here provides
 ![sample cucumber test output](https://codeontheroaddotinfo.files.wordpress.com/2016/08/screen-shot-2016-09-19-at-2-44-20-pm.png?w=1320)
 
 #### HTML Reports
-HTML Reports are configured in the cucumber.yml file. After executing the tests, the report can be found by accessing the project's 'demo-auto-test-android/report.html' file 
+HTML Reports are configured in the cucumber.yml file. After executing the tests, the report can be found by accessing the project's 'demo-auto-test-android/report.html' file. As per configuration in the 'hooks.rb' file, if a scenario fails, the html report will contain a link to the screenshot for manual inspection. 
 
 #### Example html report
 ![sample cucumber html report](https://codeontheroaddotinfo.files.wordpress.com/2016/08/screen-shot-2016-09-19-at-2-46-41-pm.png?w=1320)
