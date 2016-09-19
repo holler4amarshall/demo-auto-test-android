@@ -17,7 +17,7 @@ After do |scenario|
 
 	#take screenshot
 	$driver.screenshot(screenshot_file)
-	embed("screenshots", screenshot_file, "image/png")
+	embed("#{screenshot_file}", "image/png")
 	end
 	$driver.driver_quit
 end
