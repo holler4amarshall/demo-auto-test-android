@@ -63,7 +63,7 @@ If all pre-requisites are met, you can execute the tests using the following pro
   Via command line, access the root folder where you saved the test project (/demo-auto-test-android)
 
 
-       >>cucumber -p e2e_tests    #execute test cases in the e2e_test profile
+       >>cucumber -p e2e_tests
 
 
   _(this will initiate the tests that are included in the *profile*: e2e_tests. html reports are available when using this command)_
@@ -71,8 +71,8 @@ If all pre-requisites are met, you can execute the tests using the following pro
   Alternatively:
 
 
-       >> cucumber    #execute all tests
-       >> cucumber -t @e2e_tests    #execute tests tagged as e2e_tests
+       >> cucumber                        #execute all tests
+       >> cucumber -t @e2e_tests          #execute tests tagged as e2e_tests
        >> cucumber -t @component_tests    #execute tests tagged as component_tests
 
 
