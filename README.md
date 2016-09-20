@@ -37,9 +37,6 @@ In order to run the test project, you will require the following installations:
 
 * Install / Configure [Genymotion](https://docs.genymotion.com/Content/01_Get_Started/Installation.htm)  on your computer as follows: 
   1.  Add a virtual device: 'Custom Phone - 6.0.0 - API 23 - 768x1280
-      
-      Note that the tests can be executed on real device or different emulators other than noted above. 
-      If changing these settings, please ensure that Appium points to the correct device. 
 
 * Install SeriesGuide application to your emulator via command line 
   (you can execute these commands from your Android-SDK folder)
@@ -47,6 +44,7 @@ In order to run the test project, you will require the following installations:
           >> ./adb devices
           >> ./adb install /<path to android-automation folder >/features/support/SeriesGuide-31.1.apk
 
+Note that the tests can be executed on real device or different emulators other than noted above. 
 
 ### Execute tests
 If all pre-requisites are met, you can execute the tests using the following process: 
@@ -55,7 +53,8 @@ If all pre-requisites are met, you can execute the tests using the following pro
   Check active connection by accessing your android-sdk folder on your command line, and executing the following command: 
   (The successfully connected device should appear in the output)
 
-          >>  ./adb devices
+
+     >>  ./adb devices
  
 
   2. Launch Appium (ensure it is listening to your emulator)
@@ -64,17 +63,18 @@ If all pre-requisites are met, you can execute the tests using the following pro
   Via command line, access the root folder where you saved the test project (/demo-auto-test-android)
 
 
-          >>cucumber -p e2e_tests    #execute test cases in the e2e_test profile
+    >>cucumber -p e2e_tests    #execute test cases in the e2e_test profile
 
 
   _(this will initiate the tests that are included in the *profile*: e2e_tests. html reports are available when using this command)_
 
-
   Alternatively:
+
 
     >> cucumber    #execute all tests
     >> cucumber -t @e2e_tests    #execute tests tagged as e2e_tests
     >> cucumber -t @component_tests    #execute tests tagged as component_tests
+
 
   When the test cases are running, you can see the log file output on the command line, along with the steps being executed automatically in your Genymotion emulator. 
 
